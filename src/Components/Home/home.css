@@ -14,25 +14,43 @@
 .logoHome {
   margin-bottom: 2rem;
 }
-
+.logo {
+  width: 60rem;
+}
 
 .gameWarning {
-  margin-bottom: 1rem;
-  font-size: 20px;
+  margin-bottom: 2rem;
+  font-size: 30px;
 }
 
 
 /*Ghost Img*/
 .homePageImg {
-  width: 15.5rem;
+  width: 20rem;
 }
 
 
 /*Resizing*/
+@media (max-width: 1306px) {
+  .logo{
+    width: 40rem;
+    margin-top: -4rem;
+  }
+
+  .gameWarning {
+    margin-bottom: 1rem;
+    font-size: 20px;
+  }
+
+  .homePageImg {
+    width: 15.5rem;
+  }
+}
 
 @media (max-width: 930px) {
   .logo {
     width: 25rem;
+    margin-top: -7rem;
   }
 
   .gameWarning {
