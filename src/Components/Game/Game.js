@@ -9,6 +9,7 @@ import logo from '../Home/img/logo.png'
 
 //sprites
 import Player1 from './img/player1.png';
+import AimsforPoints from './img/aims_for_points.png';
 
 const Game = () => {
 
@@ -103,6 +104,37 @@ const Game = () => {
       }
     }
     const player = new Player();
+
+    //Pumpkins
+
+    const aimsArray = [];
+    const aimsImage = new Image();
+    aimsImage.src = AimsforPoints;
+
+    class Aims {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        //need to add 100 to hide pumpkins on the bottom
+        this.y = canvas.height + 100;
+        this.radius = 50;
+        this.speed = Math.random() * 5 + 1;
+        this.distance = 0;
+        this.counted = false;
+        this.sound = 'sound';
+      }
+      update() {
+        this.y -= this.speed;
+        const dx = this.x - player.x;
+        const dy = this.y - player.y;
+        this.distance = Math.sqrt(dx * dx + dy * dy);
+      }
+
+      draw() {
+        ctx.drawImage(aimsImage, this.x - 50, this.y - 60, this.radius * 2, this.radius * 2);
+
+      }
+    }
+
 
     // Animation Loop
     function animate() {
