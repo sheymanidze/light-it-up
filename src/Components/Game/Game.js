@@ -11,6 +11,9 @@ import logo from '../Home/img/logo.png'
 import Player1 from './img/player1.png';
 import AimsforPoints from './img/aims_for_points.png';
 
+//Audio
+import HitSound from './sounds/hit_sound.ogg'
+
 const Game = () => {
 
   //canvas
@@ -135,10 +138,53 @@ const Game = () => {
       }
     }
 
+    const aimsHit = document.createElement('audio');
+    aimsHit.src = HitSound;
+
+    function handleAims() {
+      if (gameFrame % 50 == 0) {
+        aimsArray.push(new Aims());
+      }
+
+      //get rid off blinking
+      for (let i = 0; i < aimsArray.length; i++) {
+        aimsArray[i].update();
+        aimsArray[i].draw();
+        if (aimsArray[i].y < 0 - aimsArray[i].radius * 2) {
+          aimsArray.splice(i, 1);
+          i--;
+        } else if (aimsArray[i]) {
+          if (aimsArray[i].distance < aimsArray[i].radius + player.radius) {
+            if (!aimsArray[i].counted) {
+              if (aimsArray[i].sound == 'sound') {
+                aimsHit.play();
+              }
+              score++;
+              aimsArray[i].counted = true;
+              aimsArray.splice(i, 1);
+              i--;
+
+            }
+
+          }
+
+        }
+
+      }
+      for (let i = 0; i < aimsArray.length; i++) {
+
+
+      }
+    }
+
 
     // Animation Loop
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      handleAims();
+      player.update();
+      player.draw();
 
       requestAnimationFrame(animate);
     }
