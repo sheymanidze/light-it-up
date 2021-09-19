@@ -308,8 +308,12 @@ const Game = () => {
       canvasPosition = canvas.getBoundingClientRect();
     });
 
+  }, []);
 
-  }, [])
+  //restart/refresh page
+  function refreshPage() {
+    window.location.reload(false)
+  };
 
   return (
     <div className="flex-center-column" id="game">
@@ -318,7 +322,7 @@ const Game = () => {
       </Box>
       <Box className="flex-center-column" sx={{ m: "3rem" }}>
         <Link className="links" to="/game">
-          <Fab variant="extended"> Restart
+          <Fab variant="extended" onClick={refreshPage}> Restart
           </Fab>
         </Link>
         <Link className="links" to="/">
@@ -337,7 +341,7 @@ const Game = () => {
       </Box>
       <Box className="flex-center-column allButtons" sx={{ m: "3rem" }}>
         <Link className="links" to="/game">
-          <Fab variant="extended" > Restart
+          <Fab variant="extended" onClick={refreshPage}> Restart
           </Fab>
         </Link>
         <Link className="links" to="/">
