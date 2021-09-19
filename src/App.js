@@ -1,11 +1,20 @@
+import React from "react";
+import Home from "./Components/Home/Home";
+import Game from "./Components/Game/Game";
+import { HashRouter, Switch, Route } from "react-router-dom";
 
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    <HashRouter>
 
-    </div>
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/game" exact component={Game} />
+      </Switch>
+
+    </HashRouter>
   );
 }
 
