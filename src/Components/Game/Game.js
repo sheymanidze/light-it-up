@@ -1,7 +1,10 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 //Material UI components
 import Box from '@material-ui/core/Box';
+import { Fab } from '@material-ui/core';
+
 
 import './game.css';
 
@@ -311,7 +314,18 @@ const Game = () => {
       <Box className="logoGame">
         <img className="logo" src={logo} alt="logo"></img>
       </Box>
-
+      <Box className="flex-center-column" sx={{ m: "3rem" }}>
+        <Link className="links" to="/game">
+          <Fab variant="extended"> Restart
+          </Fab>
+        </Link>
+        <Link className="links" to="/">
+          <Fab variant="extended" > Home
+          </Fab>
+        </Link>
+        <Fab variant="extended" id="screenshot"> Screenshot
+        </Fab>
+      </Box>
       <Box className="borderBox">
         <canvas
           className="canvas1"
@@ -319,7 +333,18 @@ const Game = () => {
           ref={canvasRef}>
         </canvas>
       </Box>
-
+      <Box className="flex-center-column allButtons" sx={{ m: "3rem" }}>
+        <Link className="links" to="/game">
+          <Fab variant="extended" > Restart
+          </Fab>
+        </Link>
+        <Link className="links" to="/">
+          <Fab variant="extended" > Home
+          </Fab>
+        </Link>
+        <Fab variant="extended" id="screenshot" > Screenshot
+        </Fab>
+      </Box>
     </div>
   )
 }
