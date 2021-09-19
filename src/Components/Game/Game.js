@@ -19,6 +19,7 @@ import Obstacles from './img/obstacles.png';
 //Audio
 import HitSound from './sounds/hit_sound.ogg';
 import BackgroundMusic from './sounds/background_music.mp3';
+import Obstacle1Sound from './sounds/obstacle1_sound.ogg'
 
 const Game = () => {
 
@@ -241,6 +242,15 @@ const Game = () => {
           else this.frameY = 0;
         }
 
+        //collision detection
+        const dx = this.x - player.x;
+        const dy = this.y - player.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < this.radius + player.radius) {
+
+          handleGameOver();
+        }
+
 
       }
     }
@@ -250,7 +260,20 @@ const Game = () => {
     function handleObstacle() {
       obstacle1.draw();
       obstacle1.update();
+    }
 
+    const obstacle1Sound = document.createElement('audio');
+    obstacle1Sound.src = Obstacle1Sound;
+
+    function handleGameOver() {
+      ctx.fillStyle = 'white';
+      ctx.shadowBlur = 4;
+      ctx.fillText('GOT YOU', 280, 100);
+      ctx.fillStyle = '#d32f2f';
+      ctx.fillText('Your score is ...' + score, 240, 450);
+      gameOver = true;
+      obstacle1Sound.play();
+      backgroundMusic.src = "";
     }
 
 
@@ -265,8 +288,11 @@ const Game = () => {
       player.update();
       player.draw();
       handleObstacle();
+      ctx.fillStyle = 'yellow';
+      ctx.fillText('score: ' + score, 10, 50);
+      gameFrame++;
+      if (!gameOver) requestAnimationFrame(animate);
 
-      requestAnimationFrame(animate);
     }
 
     animate();
