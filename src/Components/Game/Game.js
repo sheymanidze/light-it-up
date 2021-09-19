@@ -3,17 +3,20 @@ import React, { useRef, useEffect, useState } from 'react';
 //Material UI components
 import Box from '@material-ui/core/Box';
 
-import './game.css'
+import './game.css';
 
-import logo from '../Home/img/logo.png'
+
+//img
+import logo from '../Home/img/logo.png';
+import Background from './img/background.png';
 
 //sprites
 import Player1 from './img/player1.png';
 import AimsforPoints from './img/aims_for_points.png';
 
 //Audio
-import HitSound from './sounds/hit_sound.ogg'
-import BackgroundMusic from './sounds/background_music.mp3'
+import HitSound from './sounds/hit_sound.ogg';
+import BackgroundMusic from './sounds/background_music.mp3';
 
 const Game = () => {
 
@@ -60,6 +63,19 @@ const Game = () => {
     const backgroundMusic = document.createElement('audio');
     backgroundMusic.src = BackgroundMusic;
     backgroundMusic.play()
+
+    //background img
+    const background = new Image();
+    background.src = Background;
+    const BG = {
+      x: 0,
+      y: 0,
+      width: canvas.width,
+      height: canvas.height
+    };
+    function handleBackground() {
+      ctx.drawImage(background, BG.x, BG.y, BG.width, BG.height);
+    };
 
     //player
     const player1 = new Image();
@@ -114,8 +130,8 @@ const Game = () => {
     }
     const player = new Player();
 
-    //Pumpkins
 
+    //Pumpkins
     const aimsArray = [];
     const aimsImage = new Image();
     aimsImage.src = AimsforPoints;
@@ -184,10 +200,12 @@ const Game = () => {
     }
 
 
+
+
     // Animation Loop
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+      handleBackground();
       handleAims();
       player.update();
       player.draw();
