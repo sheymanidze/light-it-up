@@ -1,0 +1,76 @@
+.homePage {
+  background-color: #080706
+  ;
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: whitesmoke;
+}
+
+/*Logo */
+.logoHome {
+  margin-bottom: 2rem;
+}
+
+
+.gameWarning {
+  margin-bottom: 1rem;
+  font-size: 20px;
+}
+
+
+/*Ghost Img*/
+.homePageImg {
+  width: 15.5rem;
+}
+
+
+/*Resizing*/
+
+@media (max-width: 930px) {
+  .gameWarning {
+    font-size: 10px;
+  }
+
+  .homePageImg{
+    width: 10rem;
+  }
+
+  .makeStyles-root-1 {
+    font-size: 20px !important;
+    width: 200px !important;
+    height: 70px !important;
+  }
+
+  .happyHal {
+    margin-top: 0;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 632px) {
+  .logo {
+    width: 20rem;
+  }
+  .gameWarning {
+    font-size: 8px;
+  }
+
+  .homePageImg{
+    width: 5rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .gameWarning, .homePageImg, .happyHal {
+    display: none;
+  }
+
+  .logo {
+    width: 15rem;
+  }
+
+}

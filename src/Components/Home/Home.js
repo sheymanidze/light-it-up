@@ -26,7 +26,7 @@ const Home = () => {
       </Box>
 
       <Box>
-        <img className="boo" src={HomePageImage} alt="Ghost"></img>
+        <img className="homePageImg" src={HomePageImage} alt="Ghost"></img>
       </Box>
 
 
