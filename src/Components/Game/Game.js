@@ -13,6 +13,8 @@ import Background from './img/background.png';
 //sprites
 import Player1 from './img/player1.png';
 import AimsforPoints from './img/aims_for_points.png';
+//animated sprites
+import Obstacles from './img/obstacles.png';
 
 //Audio
 import HitSound from './sounds/hit_sound.ogg';
@@ -195,9 +197,11 @@ const Game = () => {
       }
       for (let i = 0; i < aimsArray.length; i++) {
 
-
       }
     }
+
+    //Obstacles
+
 
 
 
