@@ -1,0 +1,7 @@
+.canvas1 {
+  width: 800px;
+  height: 500px;
+  border: 6px solid black;
+  overflow: hidden;
+}
+
