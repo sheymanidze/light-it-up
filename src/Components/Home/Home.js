@@ -50,6 +50,84 @@ const Home = () => {
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+
+
+    //creating particles
+    const mouse = {
+      x: undefined,
+      y: undefined,
+    }
+
+    const particlesArray = [];
+
+    canvas.addEventListener('click', function (event) {
+      event.preventDefault();
+      mouse.x = event.x;
+      console.log(event)
+      mouse.y = event.y;
+      for (let i = 0; i < 10; i++) {
+        particlesArray.push(new Particle());
+      }
+
+    });
+
+    canvas.addEventListener('mousemove', function (event) {
+      mouse.x = event.x;
+      mouse.y = event.y;
+      for (let i = 0; i < 5; i++) {
+        particlesArray.push(new Particle());
+      }
+    });
+
+    class Particle {
+      constructor() {
+        this.x = mouse.x;
+        this.y = mouse.y;
+        this.size = Math.random() * 15 + 1;
+        this.speedX = Math.random() * 3 - 1.5;
+        this.speedY = Math.random() * 3 - 1.5;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.size > 0.2) this.size -= 0.1;
+      }
+
+      draw() {
+        ctx.fillStyle = 'yellow';
+        ctx.strokeStyle = 'yellow';
+        ctx.lineWidth = 10;
+        ctx.shadowColor = 'orange';
+        ctx.shadowBlur = 40;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
+
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+
+      }
+    }
+
+    function handleParticles() {
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        particlesArray[i].draw();
+        if (particlesArray[i].size <= 0.3) {
+          particlesArray.splice(i, 1);
+          i--;
+        }
+      }
+    }
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      handleParticles();
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
   }, [])
 
 
