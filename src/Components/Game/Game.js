@@ -1,15 +1,14 @@
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import './game.css'
+
 //Material UI components
 import Box from '@material-ui/core/Box';
 import { Fab } from '@material-ui/core';
 import { Slider } from '@material-ui/core';
 import { VolumeDown } from '@mui/icons-material';
 import { VolumeUp } from '@mui/icons-material';
-
-import './game.css';
-
 
 //img
 import logo from '../Home/img/logo.png';
@@ -21,18 +20,20 @@ import AimsforPoints from './img/aims_for_points.png';
 //animated sprites
 import Obstacles from './img/obstacles.png';
 
+
 //Audio
 import HitSound from './sounds/hit_sound.ogg';
 import BackgroundMusic from './sounds/background_music.mp3';
 import Obstacle1Sound from './sounds/obstacle1_sound.ogg';
 
-//screenshot html2canvas
+//html2canvas for screenshot
 import html2canvas from 'html2canvas';
+
+
 
 
 const Game = () => {
 
-  //canvas
   const canvasRef = useRef(null)
 
   useEffect(() => {
@@ -44,7 +45,6 @@ const Game = () => {
     canvas.width = 800;
     canvas.height = 500;
 
-    //game
     let score = 0;
     let gameFrame = 0;
     ctx.font = '50px Georgia';
@@ -52,6 +52,7 @@ const Game = () => {
     let gameOver = false;
 
     let canvasPosition = canvas.getBoundingClientRect();
+
 
     //mouse interactivity
     const mouse = {
@@ -71,27 +72,19 @@ const Game = () => {
       mouse.click = false;
     });
 
-    //background audio
+
+    //background music
     const backgroundMusic = document.createElement('audio');
     backgroundMusic.src = BackgroundMusic;
-    backgroundMusic.play()
+    backgroundMusic.play();
 
-    //background img
-    const background = new Image();
-    background.src = Background;
-    const BG = {
-      x: 0,
-      y: 0,
-      width: canvas.width,
-      height: canvas.height
-    };
-    function handleBackground() {
-      ctx.drawImage(background, BG.x, BG.y, BG.width, BG.height);
-    };
+
 
     //player
+
     const player1 = new Image();
     player1.src = Player1;
+
 
     class Player {
       constructor() {
@@ -128,30 +121,31 @@ const Game = () => {
           ctx.stroke();
         }
 
+
         ctx.save();
         //img not showing 
         ctx.translate(this.x, this.y);
         ctx.rotate(this.angle);
 
-
         ctx.drawImage(player1, 0 - 50, 0 - 55, this.spriteWidth / 1.2, this.spriteHeight / 1.2);
 
         ctx.restore();
 
+
       }
     }
+
     const player = new Player();
 
 
-    //Pumpkins
+    //Pumpkins/aims for points
     const aimsArray = [];
     const aimsImage = new Image();
     aimsImage.src = AimsforPoints;
-
-    class Aims {
+    class Aim {
       constructor() {
         this.x = Math.random() * canvas.width;
-        //need to add 100 to hide pumpkins on the bottom
+        //need to add 100 to hide bubbles on the bottom
         this.y = canvas.height + 100;
         this.radius = 50;
         this.speed = Math.random() * 5 + 1;
@@ -172,12 +166,13 @@ const Game = () => {
       }
     }
 
-    const aimsHit = document.createElement('audio');
-    aimsHit.src = HitSound;
+    const hitSound = document.createElement('audio');
+    hitSound.src = HitSound;
 
-    function handleAims() {
+
+    function handleBubbles() {
       if (gameFrame % 50 == 0) {
-        aimsArray.push(new Aims());
+        aimsArray.push(new Aim());
       }
 
       //get rid off blinking
@@ -189,9 +184,10 @@ const Game = () => {
           i--;
         } else if (aimsArray[i]) {
           if (aimsArray[i].distance < aimsArray[i].radius + player.radius) {
+
             if (!aimsArray[i].counted) {
               if (aimsArray[i].sound == 'sound') {
-                aimsHit.play();
+                hitSound.play();
               }
               score++;
               aimsArray[i].counted = true;
@@ -199,12 +195,25 @@ const Game = () => {
               i--;
 
             }
-
           }
-
         }
-
       }
+    }
+
+    //Background
+    const background = new Image();
+    background.src = Background;
+
+    const BG = {
+      x: 0,
+      y: 0,
+      width: canvas.width,
+      height: canvas.height
+    }
+
+    function handleBackground() {
+      ctx.drawImage(background, BG.x, BG.y, BG.width, BG.height);
+
     }
 
     //Obstacles
@@ -256,14 +265,12 @@ const Game = () => {
 
           handleGameOver();
         }
-
-
       }
     }
 
     const obstacle1 = new Obstacle();
 
-    function handleObstacle() {
+    function handleEnemies() {
       obstacle1.draw();
       obstacle1.update();
     }
@@ -282,52 +289,61 @@ const Game = () => {
       backgroundMusic.src = "";
     }
 
-
-
-
-
     // Animation Loop
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       handleBackground();
-      handleAims();
+      handleBubbles();
       player.update();
       player.draw();
-      handleObstacle();
+      handleEnemies();
       ctx.fillStyle = 'yellow';
       ctx.fillText('score: ' + score, 10, 50);
       gameFrame++;
       if (!gameOver) requestAnimationFrame(animate);
-
     }
 
     animate();
 
-
-    //keeps game same size
     window.addEventListener('resize', function () {
       canvasPosition = canvas.getBoundingClientRect();
     });
 
-  }, []);
+    const elem = document.querySelector('#screenshot');
+    elem.addEventListener('click', () => {
+      canvas.toBlob((blob) => {
+        saveBlob(blob, `screencapture-${canvas.width}x${canvas.height}.png`);
+      });
+    });
 
-  //restart/refresh page
+    const saveBlob = (function () {
+      const a = document.createElement('a');
+      document.body.appendChild(a);
+      a.style.display = 'none';
+      return function saveData(blob, fileName) {
+        const url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = fileName;
+        a.click();
+      };
+    }());
+
+  }, [])
+
+
   function refreshPage() {
-    window.location.reload(false)
-  };
+    window.location.reload(false);
+  }
 
   function report() {
-    let region = document.querySelector("body"); // whole screen
+    // whole canvas screen
+    let region = document.querySelector("body");
     html2canvas(region, {
       onrendered: function (canvas) {
         let jpgUrl = canvas.toDataURL();
         let img = document.querySelector(".screen");
-        img.src = jpgUrl; // jpgUrl contains screenshot graphics data in url form
-
-        // here you can allow user to set bug-region
-        // and send it with 'jpgUrl' to server
-
-
+        // jpgUrl contains screenshot graphics data in url form
+        img.src = jpgUrl;
       },
     });
   }
@@ -338,6 +354,7 @@ const Game = () => {
         <img className="logo" src={logo} alt="logo"></img>
       </Box>
       <div id="innerContainer">
+
         <Box className="flex-center-column" sx={{ m: "3rem" }}>
           <Link className="links" to="/game">
             <Fab variant="extended" onClick={refreshPage}> Restart
