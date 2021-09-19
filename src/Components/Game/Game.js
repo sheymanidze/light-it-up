@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 //Material UI components
 import Box from '@material-ui/core/Box';
 import { Fab } from '@material-ui/core';
-
+import { Slider } from '@material-ui/core';
+import { VolumeDown } from '@mui/icons-material';
+import { VolumeUp } from '@mui/icons-material';
 
 import './game.css';
 
@@ -344,6 +346,16 @@ const Game = () => {
         </Link>
         <Fab variant="extended" id="screenshot" > Screenshot
         </Fab>
+      </Box>
+      <Box className="musicControl">
+        <h4>Music</h4>
+        <VolumeDown />
+        <Slider aria-label="Volume" />
+        <VolumeUp />
+        <h4 className="soundEff">Sound Effects</h4>
+        <VolumeDown />
+        <Slider aria-label="Volume" />
+        <VolumeUp />
       </Box>
     </div>
   )
