@@ -13,6 +13,7 @@ import AimsforPoints from './img/aims_for_points.png';
 
 //Audio
 import HitSound from './sounds/hit_sound.ogg'
+import BackgroundMusic from './sounds/background_music.mp3'
 
 const Game = () => {
 
@@ -54,6 +55,11 @@ const Game = () => {
     canvas.addEventListener('mouseup', function (event) {
       mouse.click = false;
     });
+
+    //background audio
+    const backgroundMusic = document.createElement('audio');
+    backgroundMusic.src = BackgroundMusic;
+    backgroundMusic.play()
 
     //player
     const player1 = new Image();
