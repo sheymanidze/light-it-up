@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react';
 
 import './home.css'
 
@@ -40,6 +40,18 @@ const Home = () => {
   //button
   const classes = useStyles();
 
+  //for canvas
+  const canvasRef = useRef(null)
+
+  //create canvas
+  useEffect(() => {
+    // setting up canvas
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }, [])
+
 
   return (
     <div className="homePage flex-center-column">
@@ -56,6 +68,10 @@ const Home = () => {
       <Box>
         <img className="homePageImg" src={HomePageImage} alt="Ghost"></img>
       </Box>
+      <canvas
+        id="homeCanvas"
+        ref={canvasRef}>
+      </canvas>
       <Link className="links" to="/game">
         <Button className="startBtn" classes={{ root: classes.root, label: classes.label }}>
           Let's Start
