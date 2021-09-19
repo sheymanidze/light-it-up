@@ -1,7 +1,171 @@
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  text-align: center;
+}
+
+.links {
+  text-decoration: none;
+}
+
+/* canvas {
+  box-sizing: border-box;
+} */
+
+/* .gameName {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 120px;
+  line-height: 110px;
+  white-space: nowrap;
+  
+} */
+
+/* .gameName::before {
+  content: "happy halloween";
+  position: absolute;
+  bottom: -70px;
+  font-size: 30px;
+  text-align: center;
+  width: 100%;
+} */
+/* .gameName {
+  border-top: 5px solid black;
+} */
+
+/* .App-logo {
+  height: 40vmin;
+  pointer-events: none;
+} */
+
+/* @media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+} */
+
+
+
+/* .App-link {
+  color: #61dafb;
+} */
+
+/* @keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
+#game {
+  width: 90vw;
+  /* height: 90vh; */
+  margin: 2rem;
+  padding: 1rem;
+  border: 4px solid black;
+  border-radius: 20px;
+  background: linear-gradient(#ff6659, #d32f2f, #9a0007,  #d32f2f);
+  box-shadow: inset 2px 1px 3px 7px rgb(154,0,7,0.3);
+}
+
+#innerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-center-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+
 .canvas1 {
   width: 800px;
   height: 500px;
   border: 6px solid black;
+  /* border-radius: 8px; */
+  /* box-shadow: #080706 5px 5px 5px 10px; */
   overflow: hidden;
+}
+
+.borderBox {
+  border: 4px solid black;
+  padding: 5px 5px 2px 5px;
+  background-color: #7f0000;
+}
+
+.links {
+  text-decoration: none;
+}
+
+.homePage {
+  background-color: #080706
+  ;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* font-size: calc(10px + 2vmin); */
+  color: whitesmoke;
+}
+
+.gameName h1 {
+ font-size: 80px !important;
+ margin-top: -10rem;
+ margin-bottom: 10rem;
+}
+
+ .logo {
+
+  width: 15rem;
+  margin-top: 0;
+}
+
+
+.MuiFab-extended {
+  margin-bottom: 3rem !important;
+}
+
+.musicControl {
+  /* position: absolute;
+  margin-top: 50rem; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: normal;
+  
+}
+
+
+@media (max-width: 1298px) {
+
+  .MuiFab-extended {
+    width: 48px !important;
+    
+  }
+
+  .MuiFab-root {
+
+    font-size: 0.4rem !important;
+
+  }
+
+  .allButton {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
 }
 

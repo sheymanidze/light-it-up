@@ -24,7 +24,11 @@ import Obstacles from './img/obstacles.png';
 //Audio
 import HitSound from './sounds/hit_sound.ogg';
 import BackgroundMusic from './sounds/background_music.mp3';
-import Obstacle1Sound from './sounds/obstacle1_sound.ogg'
+import Obstacle1Sound from './sounds/obstacle1_sound.ogg';
+
+//screenshot html2canvas
+import html2canvas from 'html2canvas';
+
 
 const Game = () => {
 
@@ -201,9 +205,6 @@ const Game = () => {
         }
 
       }
-      for (let i = 0; i < aimsArray.length; i++) {
-
-      }
     }
 
     //Obstacles
@@ -315,42 +316,60 @@ const Game = () => {
     window.location.reload(false)
   };
 
+  function report() {
+    let region = document.querySelector("body"); // whole screen
+    html2canvas(region, {
+      onrendered: function (canvas) {
+        let jpgUrl = canvas.toDataURL();
+        let img = document.querySelector(".screen");
+        img.src = jpgUrl; // jpgUrl contains screenshot graphics data in url form
+
+        // here you can allow user to set bug-region
+        // and send it with 'jpgUrl' to server
+
+
+      },
+    });
+  }
+
   return (
     <div className="flex-center-column" id="game">
       <Box className="logoGame">
         <img className="logo" src={logo} alt="logo"></img>
       </Box>
-      <Box className="flex-center-column" sx={{ m: "3rem" }}>
-        <Link className="links" to="/game">
-          <Fab variant="extended" onClick={refreshPage}> Restart
+      <div id="innerContainer">
+        <Box className="flex-center-column" sx={{ m: "3rem" }}>
+          <Link className="links" to="/game">
+            <Fab variant="extended" onClick={refreshPage}> Restart
+            </Fab>
+          </Link>
+          <Link className="links" to="/">
+            <Fab variant="extended" > Home
+            </Fab>
+          </Link>
+          <Fab variant="extended" id="screenshot" onClick={report}> Screenshot
           </Fab>
-        </Link>
-        <Link className="links" to="/">
-          <Fab variant="extended" > Home
+        </Box>
+        <Box className="borderBox">
+          <canvas
+            className="canvas1"
+            id="canvas"
+            ref={canvasRef}>
+          </canvas>
+        </Box>
+        <Box className="flex-center-column allButtons" sx={{ m: "3rem" }}>
+          <Link className="links" to="/game">
+            <Fab variant="extended" onClick={refreshPage}> Restart
+            </Fab>
+          </Link>
+          <Link className="links" to="/">
+            <Fab variant="extended" > Home
+            </Fab>
+          </Link>
+          <Fab variant="extended" id="screenshot" onClick={report}> Screenshot
           </Fab>
-        </Link>
-        <Fab variant="extended" id="screenshot"> Screenshot
-        </Fab>
-      </Box>
-      <Box className="borderBox">
-        <canvas
-          className="canvas1"
-          id="canvas"
-          ref={canvasRef}>
-        </canvas>
-      </Box>
-      <Box className="flex-center-column allButtons" sx={{ m: "3rem" }}>
-        <Link className="links" to="/game">
-          <Fab variant="extended" onClick={refreshPage}> Restart
-          </Fab>
-        </Link>
-        <Link className="links" to="/">
-          <Fab variant="extended" > Home
-          </Fab>
-        </Link>
-        <Fab variant="extended" id="screenshot" > Screenshot
-        </Fab>
-      </Box>
+        </Box>
+      </div>
       <Box className="musicControl">
         <h4>Music</h4>
         <VolumeDown />
@@ -361,7 +380,7 @@ const Game = () => {
         <Slider aria-label="Volume" />
         <VolumeUp />
       </Box>
-    </div>
+    </div >
   )
 }
 
