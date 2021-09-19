@@ -31,6 +31,10 @@
 /*Resizing*/
 
 @media (max-width: 930px) {
+  .logo {
+    width: 25rem;
+  }
+
   .gameWarning {
     font-size: 10px;
   }

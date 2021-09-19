@@ -13,6 +13,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import logo from './img/logo.png'
 import HomePageImage from './img/boo.PNG'
 
+//sprites
+import AnimatedSprites from './img/animated_torch.png';
+
 
 
 //Custom made button
@@ -128,6 +131,34 @@ const Home = () => {
     }
 
     animate();
+
+    //animation for torch sprite
+    const animatedSprite = new Image();
+    animatedSprite.src = AnimatedSprites;
+
+    const picWidth = 128;
+    const picHeight = 482;
+    let frameX = 0;
+    let frameY = 0;
+    let gameFrame = 0;
+    const staggerFrames = 8;
+
+    function displayPic() {
+
+      ctx.clearRect(0, 0, canvas.wigth, canvas.height);
+
+      ctx.drawImage(animatedSprite, frameX * picWidth, frameY, picWidth, picHeight, 80, 30, picWidth, picHeight);
+      if (gameFrame % staggerFrames == 0) {
+        if (frameX < 5) frameX++;
+        else frameX = 0;
+      }
+
+      gameFrame++;
+
+      requestAnimationFrame(displayPic)
+    }
+    displayPic();
+
   }, [])
 
 
