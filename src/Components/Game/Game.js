@@ -298,6 +298,12 @@ const Game = () => {
     animate();
 
 
+    //keeps game same size
+    window.addEventListener('resize', function () {
+      canvasPosition = canvas.getBoundingClientRect();
+    });
+
+
   }, [])
 
   return (
