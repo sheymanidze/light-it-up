@@ -201,6 +201,57 @@ const Game = () => {
     }
 
     //Obstacles
+    const obstaclesImage = new Image();
+    obstaclesImage.src = Obstacles;
+
+    class Obstacle {
+      constructor() {
+        this.x = canvas.width + 300;
+        this.y = Math.random() * (canvas.height - 150) + 90;
+        this.radius = 60;
+        this.speed = Math.random() * 2 + 2;
+        this.frame = 0;
+        this.frameX = 0;
+        this.frameY = 0;
+        this.spriteWidth = 1087;
+        this.spriteHeight = 995;
+      }
+      draw() {
+        ctx.drawImage(obstaclesImage, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x - 70, this.y - 70, this.spriteWidth / 8, this.spriteHeight / 8);
+
+      }
+      update() {
+        this.x -= this.speed;
+        if (this.x < 0 - this.radius * 2) {
+          this.x = canvas.width + 200;
+          this.y = Math.random() * (canvas.height - 150) + 90;
+          this.speed = Math.random() * 2 + 2;
+        }
+        if (gameFrame % 5 == 0) {
+          this.frame++;
+          if (this.frame >= 12) this.frame = 0;
+          if (this.frame == 3 || this.frame == 7 || this.frame || 11) {
+            this.frameX = 0;
+          } else {
+            this.frame++;
+          }
+          if (this.frame < 3) this.frameY = 0;
+          else if (this.frame < 7) this.frameY = 1;
+          else if (this.frame < 11) this.frameY = 2;
+          else this.frameY = 0;
+        }
+
+
+      }
+    }
+
+    const obstacle1 = new Obstacle();
+
+    function handleObstacle() {
+      obstacle1.draw();
+      obstacle1.update();
+
+    }
 
 
 
@@ -213,6 +264,7 @@ const Game = () => {
       handleAims();
       player.update();
       player.draw();
+      handleObstacle();
 
       requestAnimationFrame(animate);
     }
