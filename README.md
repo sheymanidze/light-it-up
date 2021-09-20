@@ -48,4 +48,34 @@
 
 # Screenshots
 
+ * Home page 
+![Home Page](./src/img/home-page.png)
+
+* Game page
+![Game page](./src/img/game-page.png)
+
+* Game rules button/alert
+![Game Rules Alert](./src/img/game-rules.png)
+
+* Screenshot button in action
+![Schreenshot option](./src/img/screenshot-button.png)
+
 # Future Developments
+  
+ * New levels:
+   After reaching certain number of points new level of the game will start with new background, more obstacles to avoid, and new aims to collect points.
+
+ * Storage:
+   Create local storage to store and display scores
+
+ * New buttons:
+   Instead of repeating home and restart buttons new buttons can be created. View scores, top players, etc.
+
+ * Volume buttons:
+   User would be able to adjust background music and sound effects volume
+
+ * More games: 
+   More games will be created using canvas. User will be able to choose the game from the home page
+
+ * Sign in/sign up page:
+   After sign in user can view game played and scores for each game. Also, based on the previous games, user will have games recommendations. 
