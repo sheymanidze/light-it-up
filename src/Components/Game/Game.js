@@ -351,7 +351,7 @@ const Game = () => {
   return (
     <div className="flex-center-column" id="game">
       <Box className="logoGame">
-        <img className="logo" src={logo} alt="logo"></img>
+        <img className="logoGame" src={logo} alt="logo"></img>
       </Box>
       <div id="innerContainer">
 
@@ -383,7 +383,7 @@ const Game = () => {
             <Fab variant="extended" > Home
             </Fab>
           </Link>
-          <Fab variant="extended" id="screenshot" onClick={report}> Screenshot
+          <Fab variant="extended"> *************
           </Fab>
         </Box>
       </div>
