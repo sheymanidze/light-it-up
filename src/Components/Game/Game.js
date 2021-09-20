@@ -348,6 +348,10 @@ const Game = () => {
     });
   }
 
+  function rules() {
+    alert("1. Burn all pumpkins and recieve points. 2. Try to avoid the ghost or game will be over. 3. Happy Halloween 👻")
+  }
+
   return (
     <div className="flex-center-column" id="game">
       <Box className="logoGame">
@@ -383,7 +387,7 @@ const Game = () => {
             <Fab variant="extended" > Home
             </Fab>
           </Link>
-          <Fab variant="extended"> *************
+          <Fab variant="extended" onClick={rules}> Game Rules
           </Fab>
         </Box>
       </div>
