@@ -26,10 +26,6 @@ import HitSound from './sounds/hit_sound.ogg';
 import BackgroundMusic from './sounds/background_music.mp3';
 import Obstacle1Sound from './sounds/obstacle1_sound.ogg';
 
-//html2canvas for screenshot
-import html2canvas from 'html2canvas';
-
-
 
 
 const Game = () => {
