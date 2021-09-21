@@ -12,14 +12,14 @@
 
 # Description
 
- Light it up is Halloween themed game application. User (as a light in the game) can collect points by trying to reach moving pumpkins. Every pumpkin brings one point. However, if the user touches the ghost, the gave will be over.
+ Light it up is Halloween themed game application. User (as a light in the game) can collect points by trying to reach moving pumpkins. Every pumpkin is equivalent to one point. However, if the user touches the ghost, the game will be over.
 
 # Specifics
 
   When the user opens the game:
    * Home page:
     * Logo designed specifically for the game using photoshop
-    * Warning for the user, that specify main rule of the game. “Don’t let the ghost to get you”
+    * Warning for the user, that specifies the main rule of the game. “Don’t let the ghost to get you”
     * Image of the ghost
     * Start button:
         After pressing “Let’s start” button user will be relocated directly to the Game page, where the game will automatically start
@@ -28,10 +28,10 @@
     * When user navigates the mouse, the particles appear creating magical light/fire effect. Particles were created using Vanilla JavaScript and Canvas
 
    * Game page:
-      The page designed in a shape of game console. When game starts user will hear background Halloween music, and will have option continue with the game, restart the game, switch back to home page or even take a screenshot of the game. 
+      The page designed to look like a gaming console. When game starts, user will hear background Halloween music. The user will have an option continue with the game, restart the game, switch back to home page or even take a screenshot of the game. 
 
      * The Game:
-        Game was created using Canvas and Vanilla JavaScript. User controls the light by clicking the mouse at any spot on the game screen. If the light hits pumpkin, the pumpkin will disappear (burn), with fire burning sound and the user will receive 1 point. On the left corner of the screen user can see the current score. Animated ghost will appear randomly in the game. If the user touches the ghost the game will be over, and the user will hear witch’s laugh, background music will stop, and warning “Got you” and the current scores will be sowing on the screen.
+        Game was created using Canvas and Vanilla JavaScript. User controls the light by clicking the mouse at any spot on the game screen. If the light hits a pumpkin, the pumpkin will disappear (burn), with a fire burning sound and the user will receive 1 point. On the left corner of the screen, the user can see the current score. Animated ghost will appear randomly in the game. If the user collides with the ghost the game will be over. The user will hear a witch’s laugh, background music will stop, and warning “Got you”. The current scores will be shown on the screen.
 
       * Buttons:
          * Restart: If user clicks on restart button the page will reload and the game will automatically start over  

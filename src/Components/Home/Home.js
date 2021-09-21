@@ -55,7 +55,9 @@ const Home = () => {
     canvas.height = window.innerHeight;
 
 
-    //creating particles
+    //creating particles 
+
+    //undefined since we need a blank canvas before starting to interact with it
     const mouse = {
       x: undefined,
       y: undefined,
@@ -66,7 +68,6 @@ const Home = () => {
     canvas.addEventListener('click', function (event) {
       event.preventDefault();
       mouse.x = event.x;
-      console.log(event)
       mouse.y = event.y;
       for (let i = 0; i < 10; i++) {
         particlesArray.push(new Particle());
@@ -77,26 +78,34 @@ const Home = () => {
     canvas.addEventListener('mousemove', function (event) {
       mouse.x = event.x;
       mouse.y = event.y;
+      //creates a trail of particles when mouse moves over canvas
       for (let i = 0; i < 5; i++) {
         particlesArray.push(new Particle());
       }
     });
 
+    //each particles one circle
     class Particle {
       constructor() {
         this.x = mouse.x;
         this.y = mouse.y;
         this.size = Math.random() * 15 + 1;
+
+        //creates a vector of movements direction and speed, making them to move in all directions
+
+        //left-right
         this.speedX = Math.random() * 3 - 1.5;
+        //up and down
         this.speedY = Math.random() * 3 - 1.5;
       }
-
+      //creating the behavior for particles, movement to all directions
       update() {
         this.x += this.speedX;
         this.y += this.speedY;
+        //making particles shrink as they move around,value can't go below 0 we will pass this.size with negative number to arc methos we will get an error, can't draw circle wit negative radius it will break the code
         if (this.size > 0.2) this.size -= 0.1;
       }
-
+      //taking values from constructor and draw circle on canvas representimg the particle 
       draw() {
         ctx.fillStyle = 'yellow';
         ctx.strokeStyle = 'yellow';
@@ -117,13 +126,16 @@ const Home = () => {
       for (let i = 0; i < particlesArray.length; i++) {
         particlesArray[i].update();
         particlesArray[i].draw();
+        //removing shrinked particles, 1 element
         if (particlesArray[i].size <= 0.3) {
           particlesArray.splice(i, 1);
+          //need to add -1, otherwise it will skip an element, that will lead to blinking particles
           i--;
         }
       }
     }
     function animate() {
+      //clear old paint
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       handleParticles();
 
