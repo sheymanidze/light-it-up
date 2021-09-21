@@ -31,6 +31,10 @@
   text-decoration: none;
 }
 
+#screenshot2 {
+  display: none;
+}
+
 .homePage {
   background-color: #080706;
   min-height: 100vh;
@@ -79,6 +83,34 @@
   .allButton {
     margin-left: 0 !important;
     margin-right: 0 !important;
+  }
+
+}
+
+@media (max-width: 1150px) {
+
+  #innerContainer{
+    display: block;
+    margin-top: -35px;
+  }
+  .logoGame {
+    width: 30rem;
+    margin-top: 1rem;
+  }
+  .MuiFab-extended {
+    width: 20rem !important;
+    
+  }
+  .MuiFab-root {
+    font-size: 2rem !important;
+  }
+
+  .firstRestart, .firstHome, #screenshot {
+    display: none;
+  }
+
+  #screenshot2 {
+    display: block;
   }
 
 }

@@ -348,6 +348,25 @@ const Game = () => {
       };
     }());
 
+    const element = document.querySelector('#screenshot2');
+    element.addEventListener('click', () => {
+      canvas.toBlob((blob) => {
+        saveBlob2(blob, `screencapture-${canvas.width}x${canvas.height}.png`);
+      });
+    });
+
+    const saveBlob2 = (function () {
+      const a = document.createElement('a');
+      document.body.appendChild(a);
+      a.style.display = 'none';
+      return function saveData(blob, fileName) {
+        const url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = fileName;
+        a.click();
+      };
+    }());
+
   }, [backgroundMusic, hitSound, obstacle1Sound])
 
 
@@ -374,16 +393,19 @@ const Game = () => {
         <img className="logoGame" src={logo} alt="logo"></img>
       </Box>
       <div id="innerContainer">
-
         <Box className="flex-center-column" sx={{ m: "3rem" }}>
-          <Link className="links" to="/game">
+          <Link className="links firstRestart" to="/game">
             <Fab variant="extended" onClick={refreshPage}> Restart
             </Fab>
           </Link>
-          <Fab variant="extended" onClick={() => navigateToHomePage()}> Home
-          </Fab>
-          <Fab variant="extended" id="screenshot" > Screenshot
-          </Fab>
+          <Box className="firstHome">
+            <Fab variant="extended" onClick={() => navigateToHomePage()}> Home
+            </Fab>
+          </Box>
+          <Box>
+            <Fab variant="extended" id="screenshot" > Screenshot
+            </Fab>
+          </Box>
         </Box>
         <Box className="borderBox">
           <canvas
@@ -399,6 +421,10 @@ const Game = () => {
           </Link>
           <Fab variant="extended" onClick={() => navigateToHomePage()}> Home
           </Fab>
+          <Box>
+            <Fab variant="extended" id="screenshot2" > Screenshot
+            </Fab>
+          </Box>
           <Fab variant="extended" onClick={rules}> Game Rules
           </Fab>
         </Box>
