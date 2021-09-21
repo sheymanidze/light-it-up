@@ -152,7 +152,9 @@ const Home = () => {
     const picHeight = 482;
     let frameX = 0;
     let frameY = 0;
+    //to slow down the animation
     let gameFrame = 0;
+    //will slow down by 8
     const staggerFrames = 8;
 
     function displayPic() {
@@ -160,11 +162,14 @@ const Home = () => {
       ctx.clearRect(0, 0, canvas.wigth, canvas.height);
 
       ctx.drawImage(animatedSprite, frameX * picWidth, frameY, picWidth, picHeight, 80, 30, picWidth, picHeight);
+
+      //it would be true every 8 frames slowing down animation 8 times
       if (gameFrame % staggerFrames == 0) {
+        //current sprite has 6 frames but 1st frame is 0
         if (frameX < 5) frameX++;
         else frameX = 0;
       }
-
+      //to slow down the animation
       gameFrame++;
 
       requestAnimationFrame(displayPic)
