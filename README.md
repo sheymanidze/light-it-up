@@ -61,6 +61,8 @@
 ![Schreenshot option](./src/img/screenshot-button.png)
 
 # Future Developments
+
+ * Create "Pause" and "Resume" options for the user
   
  * New levels:
    After reaching certain number of points new level of the game will start with new background, more obstacles to avoid, and new aims to collect points.
