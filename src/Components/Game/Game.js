@@ -48,9 +48,9 @@ const Game = () => {
     let score = 0;
     let gameFrame = 0;
     ctx.font = '50px Georgia';
-    let gameSpeed = 1;
     let gameOver = false;
 
+    //will measure current size and position of canvas element instaed of measure browser size
     let canvasPosition = canvas.getBoundingClientRect();
 
 
@@ -63,9 +63,9 @@ const Game = () => {
 
     canvas.addEventListener('mousedown', function (event) {
       mouse.click = true;
+      //offsetting mouse position based on canvasPosition
       mouse.x = event.x - canvasPosition.left;
       mouse.y = event.y - canvasPosition.top;
-      console.log(mouse.x, mouse.y);
     });
 
     canvas.addEventListener('mouseup', function (event) {
@@ -88,6 +88,7 @@ const Game = () => {
 
     class Player {
       constructor() {
+        //user starts in the middle
         this.x = canvas.width / 2;
         this.y = canvas.height / 2;
         this.radius = 50;
@@ -100,13 +101,18 @@ const Game = () => {
 
 
       }
+      //updates player position to move the player towards the mouse
       update() {
+        //d=distance
         const dx = this.x - mouse.x;
         const dy = this.y - mouse.y;
 
-        //will recalculate the angle and the img always will be facing the mouse
+        //theta counterclockwise angle between x-axis and any point. It will recalculate the angle and the img always will be facing the mouse
         let theta = Math.atan2(dy, dx);
         this.angle = theta;
+
+        //dont need else statement since we want both of them to run at the same time. 
+        // /20 to slow down player to move to mouse position, so we can actually see player on the screen
         if (mouse.x != this.x) {
           this.x -= dx / 20;
         }
@@ -121,14 +127,15 @@ const Game = () => {
           ctx.stroke();
         }
 
-
+        //saves current canvas settings
         ctx.save();
-        //img not showing 
+        //to move rotation center point where th player currently is
         ctx.translate(this.x, this.y);
         ctx.rotate(this.angle);
 
         ctx.drawImage(player1, 0 - 50, 0 - 55, this.spriteWidth / 1.2, this.spriteHeight / 1.2);
 
+        //resetting all translate cores to how they were
         ctx.restore();
 
 
@@ -145,18 +152,21 @@ const Game = () => {
     class Aim {
       constructor() {
         this.x = Math.random() * canvas.width;
-        //need to add 100 to hide bubbles on the bottom
+        //need to add 100 to hide pumpkins on the bottom
         this.y = canvas.height + 100;
         this.radius = 50;
         this.speed = Math.random() * 5 + 1;
+        //keep track of distance, triggers score and burn the pumpkins
         this.distance = 0;
         this.counted = false;
         this.sound = 'sound';
       }
+      //moves pumpkins up in negative direction on vertical y axis dpending on individual speed value. Every pumpkin will rize at a slightly different speed
       update() {
         this.y -= this.speed;
         const dx = this.x - player.x;
         const dy = this.y - player.y;
+        //to calculate actual distance
         this.distance = Math.sqrt(dx * dx + dy * dy);
       }
 
@@ -170,7 +180,8 @@ const Game = () => {
     hitSound.src = HitSound;
 
 
-    function handleBubbles() {
+    function handleAims() {
+      //if game frame vlue is divisible by 50 with 0 reminder, will be true at 50, 100, 150..
       if (gameFrame % 50 == 0) {
         aimsArray.push(new Aim());
       }
@@ -179,10 +190,13 @@ const Game = () => {
       for (let i = 0; i < aimsArray.length; i++) {
         aimsArray[i].update();
         aimsArray[i].draw();
+        //stop aimsArray to grow endlessly. 0-aimsArray[i].radius*2 added so pumpkins dont disappear to early before fully disapear on the top of canvas. Cheks if pumpkin has disappear over the top
         if (aimsArray[i].y < 0 - aimsArray[i].radius * 2) {
+          //if so remove the pumpkin
           aimsArray.splice(i, 1);
           i--;
         } else if (aimsArray[i]) {
+          //checking distance by calculating 2 points of canvas 1st centre point of the circle for aims and the secons id centre point fo rthe circle for player
           if (aimsArray[i].distance < aimsArray[i].radius + player.radius) {
 
             if (!aimsArray[i].counted) {
@@ -191,7 +205,9 @@ const Game = () => {
               }
               score++;
               aimsArray[i].counted = true;
+              //remove the pumpkin
               aimsArray.splice(i, 1);
+              //-1 correcting index value for the missing pumpkins that were just removed from the array
               i--;
 
             }
@@ -291,9 +307,10 @@ const Game = () => {
 
     // Animation Loop
     function animate() {
+      //clear old paint
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       handleBackground();
-      handleBubbles();
+      handleAims();
       player.update();
       player.draw();
       handleEnemies();
@@ -306,9 +323,11 @@ const Game = () => {
     animate();
 
     window.addEventListener('resize', function () {
+      //measures a position of canvas from the edges of browser window, distance of canvas from the top and left edge
       canvasPosition = canvas.getBoundingClientRect();
     });
 
+    //screenshot
     const elem = document.querySelector('#screenshot');
     elem.addEventListener('click', () => {
       canvas.toBlob((blob) => {
@@ -335,18 +354,6 @@ const Game = () => {
     window.location.reload(false);
   }
 
-  function report() {
-    // whole canvas screen
-    let region = document.querySelector("body");
-    html2canvas(region, {
-      onrendered: function (canvas) {
-        let jpgUrl = canvas.toDataURL();
-        let img = document.querySelector(".screen");
-        // jpgUrl contains screenshot graphics data in url form
-        img.src = jpgUrl;
-      },
-    });
-  }
 
   function rules() {
     alert("1. Burn all pumpkins and recieve points. 2. Try to avoid the ghost or game will be over. 3. Happy Halloween 👻")
@@ -368,7 +375,7 @@ const Game = () => {
             <Fab variant="extended" > Home
             </Fab>
           </Link>
-          <Fab variant="extended" id="screenshot" onClick={report}> Screenshot
+          <Fab variant="extended" id="screenshot" > Screenshot
           </Fab>
         </Box>
         <Box className="borderBox">
