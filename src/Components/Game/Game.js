@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import './game.css'
 
@@ -31,6 +31,13 @@ import Obstacle1Sound from './sounds/obstacle1_sound.ogg';
 const Game = () => {
 
   const canvasRef = useRef(null)
+  const backgroundMusic = document.createElement('audio');
+  backgroundMusic.src = BackgroundMusic;
+  const obstacle1Sound = document.createElement('audio');
+  obstacle1Sound.src = Obstacle1Sound;
+  const hitSound = document.createElement('audio');
+  hitSound.src = HitSound;
+  let history = useHistory();
 
   useEffect(() => {
 
@@ -70,8 +77,6 @@ const Game = () => {
 
 
     //background music
-    const backgroundMusic = document.createElement('audio');
-    backgroundMusic.src = BackgroundMusic;
     backgroundMusic.play();
 
 
@@ -109,10 +114,10 @@ const Game = () => {
 
         //dont need else statement since we want both of them to run at the same time. 
         // /20 to slow down player to move to mouse position, so we can actually see player on the screen
-        if (mouse.x != this.x) {
+        if (mouse.x !== this.x) {
           this.x -= dx / 20;
         }
-        if (mouse.y != this.y) {
+        if (mouse.y !== this.y) {
           this.y -= dy / 20;
         }
       }
@@ -167,13 +172,13 @@ const Game = () => {
       }
     }
 
-    const hitSound = document.createElement('audio');
-    hitSound.src = HitSound;
+
+
 
 
     function handleAims() {
       //if game frame vlue is divisible by 50 with 0 reminder, will be true at 50, 100, 150..
-      if (gameFrame % 50 == 0) {
+      if (gameFrame % 50 === 0) {
         aimsArray.push(new Aim());
       }
 
@@ -191,7 +196,7 @@ const Game = () => {
           if (aimsArray[i].distance < aimsArray[i].radius + player.radius) {
 
             if (!aimsArray[i].counted) {
-              if (aimsArray[i].sound == 'sound') {
+              if (aimsArray[i].sound === 'sound') {
                 hitSound.play();
               }
               score++;
@@ -254,11 +259,11 @@ const Game = () => {
           this.speed = Math.random() * 2 + 2;
         }
         //true every 5 frames
-        if (gameFrame % 5 == 0) {
+        if (gameFrame % 5 === 0) {
           this.frame++;
           //cycling through frames horizontaly
           if (this.frame >= 12) this.frame = 0;
-          if (this.frame == 3 || this.frame == 7 || this.frame || 11) {
+          if (this.frame === 3 || this.frame === 7 || this.frame || 11) {
             this.frameX = 0;
           } else {
             this.frame++;
@@ -288,8 +293,8 @@ const Game = () => {
       obstacle1.update();
     }
 
-    const obstacle1Sound = document.createElement('audio');
-    obstacle1Sound.src = Obstacle1Sound;
+
+
 
     function handleGameOver() {
       ctx.fillStyle = 'white';
@@ -343,11 +348,19 @@ const Game = () => {
       };
     }());
 
-  }, [])
+  }, [backgroundMusic, hitSound, obstacle1Sound])
 
 
   function refreshPage() {
     window.location.reload(false);
+  }
+
+  function navigateToHomePage() {
+    backgroundMusic.src = '';
+    obstacle1Sound.src = '';
+    hitSound.src = '';
+
+    history.push('/'); // navigate to home
   }
 
 
@@ -367,10 +380,8 @@ const Game = () => {
             <Fab variant="extended" onClick={refreshPage}> Restart
             </Fab>
           </Link>
-          <Link className="links" to="/">
-            <Fab variant="extended" > Home
-            </Fab>
-          </Link>
+          <Fab variant="extended" onClick={() => navigateToHomePage()}> Home
+          </Fab>
           <Fab variant="extended" id="screenshot" > Screenshot
           </Fab>
         </Box>
@@ -386,10 +397,8 @@ const Game = () => {
             <Fab variant="extended" onClick={refreshPage}> Restart
             </Fab>
           </Link>
-          <Link className="links" to="/">
-            <Fab variant="extended" > Home
-            </Fab>
-          </Link>
+          <Fab variant="extended" onClick={() => navigateToHomePage()}> Home
+          </Fab>
           <Fab variant="extended" onClick={rules}> Game Rules
           </Fab>
         </Box>
