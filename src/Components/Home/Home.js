@@ -164,7 +164,7 @@ const Home = () => {
       ctx.drawImage(animatedSprite, frameX * picWidth, frameY, picWidth, picHeight, 80, 30, picWidth, picHeight);
 
       //it would be true every 8 frames slowing down animation 8 times
-      if (gameFrame % staggerFrames == 0) {
+      if (gameFrame % staggerFrames === 0) {
         //current sprite has 6 frames but 1st frame is 0
         if (frameX < 5) frameX++;
         else frameX = 0;

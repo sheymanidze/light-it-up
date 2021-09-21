@@ -5,7 +5,6 @@
   ## Table of contents
  * [Description](#GDescription)
  * [Specifics](#Specifics)
- * [Deployment of application](#Deployment-of-application)
  * [Application Code](#Application-Code)
  * [Screenshots](#Screenshots)
  * [Future Developments](#Future-Developments)
@@ -37,10 +36,6 @@
          * Restart: If user clicks on restart button the page will reload and the game will automatically start over  
          * Home: After clicking on home button user will be relocated back to home page
          * Screenshot: User can make game screenshot by pressing screenshot button. After clicking the button user will be presented with the option to download the image to the local computer.
-
-# Deployment of application
-
-   To run a project, please follow the link  [https://light-it-up-game.herokuapp.com/](https://light-it-up-game.herokuapp.com/)
 
 # Application Code
 
