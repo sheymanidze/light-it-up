@@ -117,11 +117,6 @@ const Game = () => {
         }
       }
       draw() {
-        if (mouse.click) {
-          ctx.beginPath();
-          ctx.moveTo(this.x, this.y);
-          ctx.stroke();
-        }
 
         //saves current canvas settings
         ctx.save();
@@ -234,7 +229,9 @@ const Game = () => {
 
     class Obstacle {
       constructor() {
+        //+300 gives couple sec for player to escape
         this.x = canvas.width + 300;
+        //stop obstacle to appear to high or too low on the canvas
         this.y = Math.random() * (canvas.height - 150) + 90;
         this.radius = 60;
         this.speed = Math.random() * 2 + 2;
@@ -250,19 +247,23 @@ const Game = () => {
       }
       update() {
         this.x -= this.speed;
+        //resseting. Once disappear on the left edge, ressets at the right again
         if (this.x < 0 - this.radius * 2) {
-          this.x = canvas.width + 200;
+          this.x = canvas.width + 300;
           this.y = Math.random() * (canvas.height - 150) + 90;
           this.speed = Math.random() * 2 + 2;
         }
+        //true every 5 frames
         if (gameFrame % 5 == 0) {
           this.frame++;
+          //cycling through frames horizontaly
           if (this.frame >= 12) this.frame = 0;
           if (this.frame == 3 || this.frame == 7 || this.frame || 11) {
             this.frameX = 0;
           } else {
             this.frame++;
           }
+          //evaluating statements in particular order, 0 for the first raw, 1 for the sec and 2 for the 3rd one
           if (this.frame < 3) this.frameY = 0;
           else if (this.frame < 7) this.frameY = 1;
           else if (this.frame < 11) this.frameY = 2;
@@ -292,7 +293,6 @@ const Game = () => {
 
     function handleGameOver() {
       ctx.fillStyle = 'white';
-      ctx.shadowBlur = 4;
       ctx.fillText('GOT YOU', 280, 100);
       ctx.fillStyle = '#d32f2f';
       ctx.fillText('Your score is ...' + score, 240, 450);
