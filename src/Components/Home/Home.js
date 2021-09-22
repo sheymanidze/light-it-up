@@ -15,6 +15,7 @@ import HomePageImage from './img/boo.PNG'
 
 //sprites
 import AnimatedSprites from './img/animated_torch.png';
+import { RemoveModeratorTwoTone } from '@mui/icons-material';
 
 
 
@@ -146,8 +147,9 @@ const Home = () => {
 
     //animation for torch sprite
     const animatedSprite = new Image();
+    animatedSprite.onload = loaded;
     animatedSprite.src = AnimatedSprites;
-
+    let imageReady = false;
     const picWidth = 128;
     const picHeight = 482;
     let frameX = 0;
@@ -157,9 +159,14 @@ const Home = () => {
     //will slow down by 8
     const staggerFrames = 8;
 
-    function displayPic() {
+    function loaded() {
+      imageReady = true;
+      displayPic();
+    }
 
-      ctx.clearRect(0, 0, canvas.wigth, canvas.height);
+    function displayPic() {
+      if (imageReady)
+        ctx.clearRect(0, 0, canvas.wigth, canvas.height);
 
       ctx.drawImage(animatedSprite, frameX * picWidth, frameY, picWidth, picHeight, 80, 30, picWidth, picHeight);
 
@@ -174,7 +181,7 @@ const Home = () => {
 
       requestAnimationFrame(displayPic)
     }
-    displayPic();
+    //displayPic();
 
     // adding for responsiveness
     window.addEventListener('resize', function () {
