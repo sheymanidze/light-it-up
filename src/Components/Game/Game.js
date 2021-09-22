@@ -30,6 +30,7 @@ import Obstacle1Sound from './sounds/obstacle1_sound.ogg';
 
 const Game = () => {
 
+  //grabbing HTML elements from the DOM
   const canvasRef = useRef(null)
 
   //Audio
@@ -43,8 +44,8 @@ const Game = () => {
   //link to home page
   let history = useHistory();
 
+  //Canvas produces "side effects". the way to introduce side effects into components through useEffect
   useEffect(() => {
-
 
     // setting up canvas
     const canvas = canvasRef.current;
