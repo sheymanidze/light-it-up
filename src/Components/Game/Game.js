@@ -394,7 +394,7 @@ const Game = () => {
       <div id="innerContainer">
         <Box className="flex-center-column" sx={{ m: "3rem" }}>
           <Link className="links firstRestart" to="/game">
-            <Fab variant="extended" onClick={refreshPage}> Restart
+            <Fab data-testid="testRestart" variant="extended" onClick={refreshPage}> Restart
             </Fab>
           </Link>
           <Box className="firstHome">

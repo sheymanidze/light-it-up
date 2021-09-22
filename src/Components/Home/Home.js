@@ -15,7 +15,7 @@ import HomePageImage from './img/boo.PNG'
 
 //sprites
 import AnimatedSprites from './img/animated_torch.png';
-import { RemoveModeratorTwoTone } from '@mui/icons-material';
+
 
 
 
@@ -181,7 +181,7 @@ const Home = () => {
 
       requestAnimationFrame(displayPic)
     }
-    //displayPic();
+
 
     // adding for responsiveness
     window.addEventListener('resize', function () {
@@ -212,8 +212,8 @@ const Home = () => {
         id="homeCanvas"
         ref={canvasRef}>
       </canvas>
-      <Link className="links" to="/game">
-        <Button className="startBtn" classes={{ root: classes.root, label: classes.label }}>
+      <Link data-testid="startBtn" className="links" to="/game">
+        <Button data-testid="letsStart" className="startBtn" classes={{ root: classes.root, label: classes.label }}>
           Let's Start
         </Button>
       </Link>
