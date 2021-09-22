@@ -10,14 +10,14 @@ import { Slider } from '@material-ui/core';
 import { VolumeDown } from '@mui/icons-material';
 import { VolumeUp } from '@mui/icons-material';
 
-//img
+//Img
 import logo from '../Home/img/logo.png';
 import Background from './img/background.png';
 
-//sprites
+//Sprites
 import Player1 from './img/player1.png';
 import AimsforPoints from './img/aims_for_points.png';
-//animated sprites
+//Animated sprites
 import Obstacles from './img/obstacles.png';
 
 
@@ -31,12 +31,16 @@ import Obstacle1Sound from './sounds/obstacle1_sound.ogg';
 const Game = () => {
 
   const canvasRef = useRef(null)
+
+  //Audio
   const backgroundMusic = document.createElement('audio');
   backgroundMusic.src = BackgroundMusic;
   const obstacle1Sound = document.createElement('audio');
   obstacle1Sound.src = Obstacle1Sound;
   const hitSound = document.createElement('audio');
   hitSound.src = HitSound;
+
+  //link to home page
   let history = useHistory();
 
   useEffect(() => {
@@ -78,7 +82,6 @@ const Game = () => {
 
     //background music
     backgroundMusic.play();
-
 
 
     //player
@@ -171,10 +174,6 @@ const Game = () => {
 
       }
     }
-
-
-
-
 
     function handleAims() {
       //if game frame vlue is divisible by 50 with 0 reminder, will be true at 50, 100, 150..
