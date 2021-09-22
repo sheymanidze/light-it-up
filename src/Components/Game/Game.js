@@ -44,7 +44,7 @@ const Game = () => {
   //link to home page
   let history = useHistory();
 
-  //Canvas produces "side effects". the way to introduce side effects into components through useEffect
+  //Canvas produces "side effects". the way to introduce side effects into components is through useEffect
   useEffect(() => {
 
     // setting up canvas
