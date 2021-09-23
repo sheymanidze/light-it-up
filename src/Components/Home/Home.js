@@ -165,10 +165,11 @@ const Home = () => {
     }
 
     function displayPic() {
-      if (imageReady)
+      if (imageReady) {
         ctx.clearRect(0, 0, canvas.wigth, canvas.height);
 
-      ctx.drawImage(animatedSprite, frameX * picWidth, frameY, picWidth, picHeight, 80, 30, picWidth, picHeight);
+        ctx.drawImage(animatedSprite, frameX * picWidth, frameY, picWidth, picHeight, 80, 30, picWidth, picHeight);
+      };
 
       //it would be true every 8 frames slowing down animation 8 times
       if (gameFrame % staggerFrames === 0) {
