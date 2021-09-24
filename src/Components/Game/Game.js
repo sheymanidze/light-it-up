@@ -263,7 +263,7 @@ const Game = () => {
           this.frame++;
           //cycling through frames horizontaly
           if (this.frame >= 12) this.frame = 0;
-          if (this.frame === 3 || this.frame === 7 || this.frame || 11) {
+          if (this.frame === 3 || this.frame === 7 || this.frame === 11) {
             this.frameX = 0;
           } else {
             this.frame++;
